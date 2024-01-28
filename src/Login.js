@@ -42,15 +42,15 @@ export default function Login() {
       }
     }).then(response =>{
       try {
-        if (response.data === "success") {
+        if (response.data === "admin") {
           navigate('/dashboard');
-        }else if (response.data === "success") {
+        }else if (response.data === "voter") {
           navigate("/Voters")
-        }else if (response.data === "success") {
+        }else if (response.data === "candidate") {
           navigate("/candidate")
         }  else {
           navigate('/');
-          alert('Invalid election id or password');
+          alert('Invalid election id or password or check your role selection well');
         }
       } catch (error) {
         console.error('Navigation error:', error);

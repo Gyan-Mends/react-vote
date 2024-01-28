@@ -9,30 +9,35 @@ session_start();
 
 //decoding the json data
 $input = file_get_contents("php://input");
-$data = json_decode($data,true);
+$data = json_decode($input,true);
 
 //including the database connection
 include("connection.php");
 
 //acepting user inputs
-$name =$data["name"];
+$name =$data["username"];
 $email = $data["email"];
 $password = $data["password"];
 $number = $data["number"];
 $users = $data["users"];
 
 //checking if the user is already registered
-$sql = "SELECT * FROM users WHERE email = '$email'";
-$result = mysqli_query($conn,$sql) or die("SQL Query Failed.");
+$sql = "SELECT * FROM registeration WHERE email = '$email'";
+$result = mysqli_query($connection,$sql) or die("SQL Query Failed.");
 if(mysqli_num_rows($result) > 0){
-    echo json_encode(array("fl"=>0,"message"=>"User already registered."));
+    echo "exist";
 }else{
     //if the user is not registered then register the user
-    $sql = "INSERT INTO users (name,email,password) VALUES ('{$data['name']}','{$data['email']}','{$data['password']}')";
-    if(mysqli_query($conn,$sql)){
-        echo json_encode(array("fl"=>1,"message"=>"User registered successfully."));
+    $sql = "INSERT INTO registeration (name,email,password,number,users) VALUES ('$name','$email','$password','$number', '$users')";
+        $query = mysqli_query($connection,$sql);
+    if($query){
+        echo "notexist";
+
+        //inserting the email into the login
+        $sql = "INSERT INTO logins (email,password,role) VALUES ('$email','$password','Admin')";
+        $query = mysqli_query($connection,$sql);
     }else{
-        echo json_encode(array("fl"=>0,"message"=>"User registration failed."));
+        echo "opps";
     }
 }
 

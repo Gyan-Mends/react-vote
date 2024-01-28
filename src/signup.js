@@ -2,11 +2,12 @@
 import axios from "axios";
 import React, { useState } from "react";
 import ReactDOM from "react-dom/client";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from 'react-router-dom';
 
 
 export default function Signup() {
     //accepting the input field inputs
+    const navigate = useNavigate();
     const [username, setUsername] = useState("");
     const [email, setEmail] = useState("");
     const [orgName, setOrgname] = useState("");
@@ -64,10 +65,13 @@ export default function Signup() {
             }
         }).then(response => {
             try {
-                if (response.data === "success") {
-                    alert("data inserted successful")
-                } else {
-                    alert("Unable to insert data")
+                if (response.data === "exist") {
+                    alert("User already exist");
+                }else if(response.data === "notexist") {
+                    alert("User registeration successful")
+                    navigate("/")
+                }else{
+                    alert("Unable to register user")
                 }
             } catch (error) {
                 console.error("insertion".error)
@@ -83,7 +87,7 @@ export default function Signup() {
                 <div class=" mt-10   border rounded-lg p-4  bg-white border boder-white shadow-md" >
                     <h1 class="text-center text-gray-500 text-lg mb-7"> Sign Up For Free</h1>
 
-                    <form onChange={handleSubmit}>
+                    <form onSubmit={handleSubmit}>
                         <div class="flex items-center justify-flex gap-10">
                             <div>
                                 <div>
