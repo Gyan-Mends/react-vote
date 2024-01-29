@@ -12,6 +12,7 @@ import VotersDetails from './VotersDetails';
 import ElectionDetails from './electionDetails';
 import Election from './elections';
 import Results from './results';
+import ElectionEach from './electionEach';
 import './index.css';
 
 
@@ -29,6 +30,7 @@ export default function App() {
         <Route path='/electionDetails' element={<ElectionDetails/>}/>
         <Route path='/elections' element={<Election/>}/>
         <Route path='/results' element={<Results/>}/>
+        <Route path='/electionEach' element={<ElectionEach/>}></Route>
       </Routes>
     </BrowserRouter>
   );

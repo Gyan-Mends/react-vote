@@ -46,7 +46,7 @@ export default function Election() {
                 </div>
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4 mt-4">
                     {elections.map(election => (
-                        <Link key={election.electionId} to={`/elections/${election.electionId}`}>
+                        <Link key={election.electionId} to={`/electionEach/${election.electionId}`}>
                             <div className="bg-white rounded-lg overflow-hidden shadow-md p-6">
                                 <div className="flex items-center mb-4">
                                     <FontAwesomeIcon icon={faThumbsUp} className="text-blue-500 text-2xl" />
